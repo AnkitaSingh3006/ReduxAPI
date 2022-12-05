@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { LoginUser } from '../redux/authSlice';
+import UserService from './userservice';
 
 function Login() {
 
@@ -11,7 +11,7 @@ function Login() {
 
     const loginHandle = () => {
         console.log(email, password);
-        dispatch(LoginUser({email,password}))
+        dispatch(UserService.loadUsers(dispatch))
     }
 
     return (
@@ -24,6 +24,7 @@ function Login() {
                 <input type="password" placeholder='password' value={password} onChange={(e) => setpassword(e.target.value)} /><br />
                 <button onClick={loginHandle} className='mt-3'>Login</button>
             </div>
+            <p>"eve.holt@reqres.in"</p>
         </div>
     )
 }
