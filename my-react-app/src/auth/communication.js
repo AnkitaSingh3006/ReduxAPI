@@ -2,13 +2,14 @@ import config from '../config';
 import axios from 'axios';
 
 
-const Communication = {
+const Communication = async (email,password) => {
 
-    async getMethod(){
-        const response = await axios.get(config.baseUrl);
-        console.log(response.data);
-        return response.data;
-    }
+    const response = await axios.post(config.baseUrl, {
+        email,
+        password
+    });
+    console.log(response.data);
+    return response.data;
 };
 
 export default Communication;

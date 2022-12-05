@@ -1,8 +1,4 @@
-const initialState = {
-    userList : [],
-    loading : true,
-    error : false,
-};
+const initialState = {};
 
 
 export default function userReducer(state = initialState, action){
