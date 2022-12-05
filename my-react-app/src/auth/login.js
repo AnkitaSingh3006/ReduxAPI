@@ -1,7 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
-import { loginUSer } from '../redux/authSlice'
-import { useDispatch } from 'react-redux'
+import React from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { LoginUser } from '../redux/authSlice';
 
 function Login() {
 
@@ -11,7 +11,7 @@ function Login() {
 
     const loginHandle = () => {
         console.log(email, password);
-        dispatch(loginUSer({ email, password }))
+        dispatch(LoginUser({email,password}))
     }
 
     return (
