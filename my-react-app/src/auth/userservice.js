@@ -1,30 +1,6 @@
-import Communication from "./Communication";
-import config from "../config";
+import { SET_MESSAGE } from "./type";
 
-const UserService = {
-  loadUsers(dispatch) {
-    dispatch({
-      type: "LOAD_USERS",
-      payload: null,
-    });
-
-    Communication.getMethod(config)
-      .then((users) => {
-        dispatch({
-          type: "GET_USERS",
-          payload: users,
-        });
-      })
-
-      .catch(() => {
-        dispatch({
-          type: "ERROR_USERS",
-          payload: null,
-        });
-      })
-
-      .finally(() => {});
-  },
-};
-
-export default UserService;
+export const UserService = (message) => ({
+  type: SET_MESSAGE,
+  payload:message,
+});

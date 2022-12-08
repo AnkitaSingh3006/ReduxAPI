@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import UserService from './userservice';
+import { UserService } from './userservice';
+
 
 function Login() {
 
@@ -11,7 +12,7 @@ function Login() {
 
     const loginHandle = () => {
         console.log(email, password);
-        dispatch(UserService.loadUsers(dispatch))
+        dispatch(UserService())
     }
 
     return (

@@ -4,12 +4,16 @@ import axios from 'axios';
 
 const Communication = async (email,password) => {
 
-    const response = await axios.post(config.baseUrl, {
+    return axios.post(config.baseUrl+"LOGIN",{
         email,
         password
-    });
-    console.log(response.data);
-    return response.data;
+    }).then((response)=>{
+        if(response.data.accessToken){
+            localStorage.setItem("user",JSON.stringify(response.data));
+        }
+        return response.data
+    })
+
 };
 
 export default Communication;
