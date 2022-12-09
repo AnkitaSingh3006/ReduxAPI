@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { UserService } from './userservice';
+import UserService from './userservice';
+import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
@@ -9,10 +10,17 @@ function Login() {
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const loginHandle = () => {
         console.log(email, password);
-        dispatch(UserService())
+        let data = {
+            email : email,
+            password : password
+        }
+        UserService.login(dispatch,data);
+        navigate('/users');
+        
     }
 
     return (
