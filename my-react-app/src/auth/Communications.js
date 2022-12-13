@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const Communication = {
 
-    async postMethod(endpoint,_data){
-        const response = await axios.get(config.baseUrl + endpoint);
+    async postMethod(_data){
+        const response = await axios.post(config.baseUrl,_data);
         return response.data;
     }
 };

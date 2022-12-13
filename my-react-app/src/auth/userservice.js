@@ -2,19 +2,23 @@ import Communication from "./Communications";
 import config from "../config";
 
 const UserService = {
-  login(dispatch, data) {
+  login(dispatch, data, history) {
     dispatch({
       type: "LOAD_LOGIN",
       payload: null,
     });
 
-    Communication.getMethod(config.endPoints.users, data)
+    console.log('config', config);
+    Communication.postMethod(data)
       .then((response) => {
-        console.log('Login_Response', response);
-        dispatch({
-          type: "Success_Login",
-          payload: response,
-        });
+        if (response) {
+          console.log('Login_Response', response);
+          dispatch({
+            type: "Success_Login",
+            payload: response,
+          });
+           history.push('/users');
+        }
       })
 
       .catch((error) => {
@@ -25,7 +29,7 @@ const UserService = {
         });
       })
 
-      .finally(() => {});
+      .finally(() => { });
   },
 };
 
