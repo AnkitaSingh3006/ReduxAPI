@@ -1,13 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import UserService from './userservice';
 
-function Login(props) {
+function Login() {
 
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     const loginHandle = () => {
         console.log('email:', email, 'password:', password);
@@ -15,8 +17,8 @@ function Login(props) {
             email: email,
             password: password
         }
-        UserService.login(dispatch, data,props.history);
-
+        UserService.login(dispatch, data);
+        navigate('/users')
     }
 
     return (
