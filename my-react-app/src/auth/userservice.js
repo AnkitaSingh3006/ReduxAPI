@@ -1,7 +1,7 @@
 import Communication from "./Communications";
 import config from "../config";
 
-const UserService = {
+const UserService  = {
   login(dispatch, data) {
     dispatch({
       type: "LOAD_LOGIN",
