@@ -12,7 +12,6 @@ function Protected(props) {
     })
     return (
         <div>
-            ghj
             <Component />
         </div>
     )

@@ -11,9 +11,6 @@ function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const loginnav = () =>{
-        navigate('/users')
-    }
 
     const loginHandle = () => {
         console.log('email:', email, 'password:', password);
@@ -21,8 +18,7 @@ function Login() {
             email: email,
             password: password
         }
-        UserService.login(dispatch, data);
-        navigate('/users')
+        UserService.login(dispatch, data, navigate);
     }
 
     return (
@@ -34,7 +30,6 @@ function Login() {
                 <label>Password</label>
                 <input type="password" placeholder='password' value={password} onChange={(e) => setpassword(e.target.value)} /><br />
                 <button onClick={loginHandle} className='mt-3'>Login</button>
-                <button onClick={loginnav} className='mt-3'>Login</button>
             </div>
             <p>"eve.holt@reqres.in"</p>
         </div>
