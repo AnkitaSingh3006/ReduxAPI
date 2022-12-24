@@ -1,47 +1,69 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import UserService from "./userservice";
 import { useDispatch, useSelector } from 'react-redux'
+import './user.css';
+import Popup from "./popup";
 
 export const Users = () => {
+
+    const [buttonPopup, setButtonPopup] = useState(false)
+
+    const [modeldata,setModeldata] = useState({
+        id:'',
+        first_name:'',
+        email:'',
+        avatar:''
+     })
+
+     const showDetail = (user) =>
+     { 
+        setModeldata(user)
+     }
 
     const dispatch = useDispatch();
 
     const userInfo = useSelector((state) => state.userData);
     console.log(userInfo);
 
-    useEffect (() => {
+    useEffect(() => {
         UserService.loadUsers(dispatch);
-    },[dispatch])
+    }, [dispatch])
 
     const errorConainer = () => {
         return <div>Error in API</div>
     };
 
-    const renderData = (userInfo) => {
+    const renderData = () => {
+        console.log('renderData', userInfo);
 
-        return userInfo.error ? (
+        return userInfo?.error ? (
             errorConainer()
         ) : (
-            <div>
-                <div>
-                    <div>ID</div>
-                    <div>EMAIL</div>
-                    <div>FIRST NAME</div>
-                    <div>LAST NAME</div>
-                    <div>LAST NAME</div>
-                </div>
-                {userInfo.userList.map((user, index) => (
-                    <div key={index}>
-                        <div>{user.id} </div>
-                        <div>{user.email}</div>
-                        <div>{user.first_name} </div>
-                        <div>{user.last_name} </div>
-                        <div>{user.avatar} </div>
-                    </div>
-                ))}
+            <div style={{ display:"flex", justifyContent:"center", padding:"20px"}}>
+                <table style={{height:"100%", width:"100%"}}>
+                    <tr>
+                        <th>Id</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Avatar</th>
+                    </tr>
+                    {userInfo?.userList.map((user, index) => (<tr key={index}>
+                        <td><button className="namePopup" onClick={() => { setButtonPopup(true); showDetail(user) }}>{user.id}</button></td>
+                        <td>{user.email}</td>
+                        <td>{user.first_name} </td>
+                        <td>{user.last_name} </td>
+                        <td><img src={user.avatar} alt="loading"/></td>
+                    </tr>))}
+                </table>
+
+                <Popup trigger={buttonPopup} popupData={modeldata} setTrigger={setButtonPopup}>
+            </Popup>
             </div>
         )
     }
+
+    return renderData();
 
 }
 
