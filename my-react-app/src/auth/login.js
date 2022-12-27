@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import UserService from './userservice';
+import config from '../config';
 
 function Login() {
 
@@ -18,7 +19,7 @@ function Login() {
             email: email,
             password: password
         }
-        UserService.login(dispatch, data, navigate);
+        UserService.login(dispatch, config.login, data, navigate);
     }
 
     return (

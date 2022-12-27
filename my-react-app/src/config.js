@@ -1,9 +1,7 @@
 const config = {
-    baseUrl: 'https://reqres.in/api/login',
+    baseUrl: 'https://reqres.in/api/',
+    login: 'login',
+    userList: 'users'
 };
 
 export default config ;
-
-export const configuration = {
-    baseUrl: 'https://reqres.in/api/users?page=2',
-};
