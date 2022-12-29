@@ -2,6 +2,7 @@ import Communication from "./Communications";
 import config from "../config";
 
 const UserService = {
+
   login(dispatch, path, data, navigate) {
     dispatch({
       type: "LOAD_LOGIN",
@@ -102,6 +103,7 @@ const UserService = {
 
       .finally(() => { });
   },
+  
 };
 
 export default UserService;

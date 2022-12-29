@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import './popup.css'
-import { useDispatch } from "react";
+import { useDispatch } from "react-redux";
 import UserService from "./userservice";
+import config from "../config";
 
 function Popup(props) {
     console.log('props', props)
@@ -21,7 +22,8 @@ function Popup(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        UserService.updateUser(dispatch);
+        UserService.updateUser(dispatch, config.userList);
+        // UserService.updateUser(dispatch);
     }
 
 

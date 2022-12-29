@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const Communication = {
 
-    async postMethod(_data, path) {
+    async postMethod(path, _data) {
         const response = await axios.post(config.baseUrl + path, _data);
         return response.data;
     },
@@ -14,12 +14,12 @@ const Communication = {
         return result.data.data;
     },
 
-    async putMethod(_data, path) {
+    async putMethod(path, _data) {
         const response = await axios.put(config.baseUrl + path, _data);
         return response.data;
     },
 
-    async deleteMethod(_data, path) {
+    async deleteMethod(path) {
         const response = await axios.delete(config.baseUrl + path);
         return response.data;
     },
