@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, memo, useEffect } from "react";
 import './popup.css'
 import { useDispatch } from "react-redux";
 import UserService from "./userservice";
@@ -7,22 +7,22 @@ import config from "../config";
 function Popup(props) {
     console.log('props', props)
 
-    const [state, setState] = useState({
-        first_name: "",
-        last_name: "",
-        email: ""
-    })
+    const [userData, setUserData] = useState(props.popupData)
+
+    useEffect(() => {
+        setUserData(props.popupData);
+    },[props.popupData])
 
     const dispatch = useDispatch();
 
-    const handleInputChange = (e) => {
-        let { first_name, value } = e.target;
-        setState({ ...state, [first_name]: value })
-    }
+    const handleInputChange = useCallback((e) => {
+        let { value } = e.target;
+        setUserData({ ...userData, [name]: value })
+    },[userData])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        UserService.updateUser(dispatch, config.userList);
+        UserService.updateUser(dispatch, config.userList + '/' + userData.id);
         // UserService.updateUser(dispatch);
     }
 
@@ -33,9 +33,9 @@ function Popup(props) {
                 <button className="close-btn" onClick={() => props.setTrigger(false)}>X</button>
                 <div>
                     <form onSubmit={handleSubmit}>
-                        <input type="text" value={props.popupData.first_name} onChange={handleInputChange}></input><br />
-                        <input type="text" value={props.popupData.last_name} onChange={handleInputChange}></input><br />
-                        <input type="text" value={props.popupData.email} onChange={handleInputChange}></input><br />
+                        <input type="text" name="first_name" value={userData.first_name} onChange={handleInputChange}></input><br />
+                        <input type="text" name="last_name" value={userData.last_name} onChange={handleInputChange}></input><br />
+                        <input type="text" name="email" value={userData.email} onChange={handleInputChange}></input><br />
                         <button type="Submit">Update</button>
                     </form>
                     {/* <table>
@@ -63,4 +63,4 @@ function Popup(props) {
     ) : "";
 }
 
-export default Popup
+export default memo (Popup)
