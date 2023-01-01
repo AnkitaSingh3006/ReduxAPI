@@ -10,7 +10,7 @@ export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case 'LOAD_USERS':
             console.log('LOAD_USERS', state);
-            return { ...state, userList: [], error: false, loading: true }
+            return { ...state, error: false, loading: true }
 
         case 'GET_USERS':
             console.log('GET_USERS', state);
@@ -22,11 +22,11 @@ export default function userReducer(state = initialState, action) {
 
         case 'DELETE_USER':
             console.log('DELETE_USER', state);
-            return { ...state, userList: [], error: true, loading: false }
+            return { ...state, error: false, loading: false }
 
         case 'UPDATE_USER':
             console.log('UPDATE_USER', state);
-            return { ...state, userList: [], error: true, loading: false }
+            return { ...state, error: false, loading: false }
 
         default:
             return state;
